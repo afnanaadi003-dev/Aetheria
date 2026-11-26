@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AETHERIA — Sovereign Archive | 10,000 Realms Before Present</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            royal: ['Cinzel', 'serif'],
+          },
+          colors: {
+            obsidian: '#04070d',
+            abyss: '#080e1a',
+            biolume: '#00f5d4',
+            aether: '#38bdf8',
+            celestial: '#818cf8',
+            sovereign: '#f59e0b',
+            goldlight: '#fde68a',
+          },
+          animation: {
+            'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 8s ease-in-out infinite',
+            'spin-slow': 'spin 24s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar for aggressively calm obsidian aesthetic */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #04070d;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 245, 212, 0.25);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(245, 158, 11, 0.5);
+    }
+
+    /* Bioluminescent & Sovereign Glows */
+    .glow-biolume {
+      box-shadow: 0 0 25px -5px rgba(0, 245, 212, 0.25);
+    }
+    .glow-gold {
+      box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.3);
+    }
+    .ambient-player-glow {
+      box-shadow: 0 0 90px -15px rgba(0, 245, 212, 0.35), 0 0 140px -30px rgba(129, 140, 248, 0.3);
+    }
+
+    /* 3D Flip Card utilities for Vault Nineteen */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+
+    /* Hide scrollbar for category pills */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-slate-100 font-sans antialiased selection:bg-biolume/30 selection:text-biolume overflow-x-hidden">
+
+  <!-- Ambient Background Bioluminescent Orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-biolume/10 rounded-full blur-[130px] animate-pulse-slow"></div>
+    <div class="absolute top-1/3 -right-32 w-[30rem] h-[30rem] bg-celestial/10 rounded-full blur-[150px] animate-pulse-slow"></div>
+    <div class="absolute -bottom-40 left-1/3 w-[28rem] h-[28rem] bg-sovereign/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- TOP YOUTUBE-STYLE SOVEREIGN NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 h-16 bg-obsidian/85 backdrop-blur-xl border-b border-white/10 px-3 sm:px-6 flex items-center justify-between gap-3">
+    <!-- Left: Sidebar Toggle & Royal Sufi Creator Brand Logo -->
+    <div class="flex items-center gap-3 shrink-0">
+      <button id="sidebarToggleBtn" aria-label="Toggle Navigation" class="p-2.5 rounded-full hover:bg-white/10 text-slate-300 hover:text-biolume transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <a href="#home" id="brandHomeBtn" class="flex items-center gap-2.5 group">
+        <!-- Custom Regal-Sufi-Pandora Emblem -->
+        <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 via-teal-500/20 to-indigo-600/30 border border-amber-400/40 flex items-center justify-center glow-gold group-hover:scale-105 transition">
+          <svg class="w-6 h-6 text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <!-- Crown + Crescent + Sacred Triangle -->
+            <path d="M3 17h18l-1.5-8-4.5 3.5L12 6l-3 6.5L4.5 9 3 17z" fill="rgba(245,158,11,0.2)"/>
+            <circle cx="12" cy="3.2" r="1.1" fill="#00f5d4" stroke="none"/>
+            <path d="M5 20h14" stroke="#00f5d4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-royal font-bold tracking-wider text-base sm:text-lg bg-gradient-to-r from-amber-200 via-teal-200 to-indigo-200 bg-clip-text text-transparent">
+              AETHERIA
+            </span>
+            <span class="hidden sm:inline-block text-[10px] font-semibold uppercase tracking-widest px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-400/30">
+              10,000 BP
+            </span>
+          </div>
+          <span class="text-[10px] text-slate-400 tracking-widest uppercase hidden md:block">
+            Sovereign Sufi &bull; Pandora Archive
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Center: YouTube-Style Search Bar with Era Filter -->
+    <div class="flex-1 max-w-2xl mx-2">
+      <form id="searchForm" class="flex items-center w-full">
+        <div class="relative flex-1 flex items-center">
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search 10,000 videos before present: Flute, Sufi, Avatar, Deities..."
+            class="w-full bg-abyss/90 border border-white/15 focus:border-biolume/60 rounded-l-full py-2 pl-4 pr-10 text-sm text-slate-100 placeholder-slate-400 focus:outline-none transition"
+          />
+          <button type="button" id="clearSearchBtn" class="hidden absolute right-3 text-slate-400 hover:text-white text-xs">
+            &#10005;
+          </button>
+        </div>
+        <button
+          type="submit"
+          aria-label="Search Archive"
+          class="px-5 py-2 bg-white/10 hover:bg-biolume/20 border border-l-0 border-white/15 rounded-r-full text-slate-200 hover:text-biolume transition flex items-center justify-center"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Right: Auto-Create Studio Button + Creator King Profile Sign -->
+    <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+      <!-- Auto-Create Video Button -->
+      <button
+        id="openAutoCreateBtn"
+        class="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/25 via-indigo-500/25 to-amber-500/25 hover:from-teal-500/40 hover:to-amber-500/40 border border-biolume/50 text-teal-100 text-xs sm:text-sm font-medium glow-biolume transition active:scale-95"
+      >
+        <svg class="w-4 h-4 text-biolume animate-spin-slow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-9H3m15.364-6.364l-12.728 12.728m0-12.728l12.728 12.728" />
+        </svg>
+        <span class="hidden sm:inline">Auto-Create</span>
+        <span class="sm:hidden">Create</span>
+      </button>
+
+      <!-- 19 Cards Quick Pill -->
+      <button
+        id="headerVault19Btn"
+        class="hidden lg:flex items-center gap-1.5 px-3 py-2 rounded-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/40 text-amber-200 text-xs font-royal tracking-wide transition"
+      >
+        <span>&#10022;</span>
+        <span>19 Vault Cards</span>
+      </button>
+
+      <!-- Sovereign YouTuber / King-Sufi Creator Sign -->
+      <div id="creatorKingBadge" class="flex items-center gap-2 pl-1.5 pr-3 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-purple-900/30 border border-amber-400/40 cursor-pointer hover:border-amber-300 transition" title="Sovereign Creator: Shah-e-Aether (Verified King & Sufi Mystic)">
+        <div class="relative w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 via-teal-400 to-indigo-600 p-0.5">
+          <div class="w-full h-full rounded-full bg-obsidian flex items-center justify-center text-amber-300 font-royal font-bold text-xs">
+            &#9813;
+          </div>
+          <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-biolume border-2 border-obsidian"></span>
+        </div>
+        <div class="hidden xl:flex flex-col text-left">
+          <span class="text-xs font-semibold text-amber-200 flex items-center gap-1">
+            SHAH-E-AETHER
+            <svg class="w-3.5 h-3.5 text-biolume" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+          </span>
+          <span class="text-[10px] text-teal-300/80">Sufi King &bull; 10K Vault</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APPLICATION SHELL -->
+  <div class="relative z-10 flex min-h-[calc(100vh-4rem)]">
+
+    <!-- LEFT SIDEBAR: "LEFT BEFORE PRESENT" REALM NAVIGATION -->
+    <aside id="leftSidebar" class="w-64 shrink-0 bg-obsidian/90 backdrop-blur-xl border-r border-white/10 p-3 flex flex-col justify-between transition-all duration-300 fixed md:sticky top-16 h-[calc(100vh-4rem)] z-30 -translate-x-full md:translate-x-0 overflow-y-auto">
+      <div class="space-y-5">
+        <!-- Era Indicator Banner -->
+        <div class="p-3 rounded-2xl bg-gradient-to-br from-teal-950/60 via-abyss to-amber-950/40 border border-biolume/20">
+          <div class="flex items-center justify-between text-[11px] text-biolume font-medium uppercase tracking-wider">
+            <span>Left Before Present</span>
+            <span class="inline-block w-2 h-2 rounded-full bg-biolume animate-ping"></span>
+          </div>
+          <p class="font-royal text-sm text-amber-200 mt-1">10,000 Videos Archived</p>
+          <p class="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
+            Aggressively calm frequency sanctuary. Zero noise. Pure celestial ether.
+          </p>
+        </div>
+
+        <!-- Primary Navigation -->
+        <nav class="space-y-1">
+          <p class="px-3 text-[10px] font-semibold uppercase tracking-widest text-slate-500 mb-1.5">Sanctuary Realms</p>
+          <button data-nav="home" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium bg-biolume/15 text-biolume border border-biolume/30 transition">
+            <span>&#9788;</span>
+            <span>10,000 Video Vault</span>
+          </button>
+          <button data-nav="watch" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white transition">
+            <span>&#9654;</span>
+            <span>Sovereign Player & Queue</span>
+          </button>
+          <button data-nav="vault19" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-amber-200/90 hover:bg-amber-500/10 transition">
+            <span>&#10022;</span>
+            <span>About Vault Nineteen Cards</span>
+          </button>
+          <button data-nav="studio" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-teal-200/90 hover:bg-teal-500/10 transition">
+            <span>&#9883;</span>
+            <span>Auto-Create Synthesizer</span>
+          </button>
+        </nav>
+
+        <!-- "Left Before Present" Realm Filters -->
+        <nav class="space-y-1 pt-2 border-t border-white/10">
+          <p class="px-3 text-[10px] font-semibold uppercase tracking-widest text-slate-500 mb-1.5">Left Before Present Eras</p>
+          <button data-category="All" class="cat-sidebar-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium bg-white/10 text-white">
+            <span>All 10,000 Realms</span>
+            <span class="text-[10px] text-biolume">10,000</span>
+          </button>
+          <button data-category="Mind Reset Flute" class="cat-sidebar-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-slate-400 hover:bg-white/5 hover:text-slate-200">
+            <span>&#127926; Mind Reset Flute</span>
+            <span class="text-[10px] text-slate-500">2,140</span>
+          </button>
+          <button data-category="Avatar Biolume" class="cat-sidebar-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-slate-400 hover:bg-white/5 hover:text-slate-200">
+            <span>&#127793; Pandora Biolume</span>
+            <span class="text-[10px] text-slate-500">1,980</span>
+          </button>
+          <button data-category="Sufi Mysticism" class="cat-sidebar-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-slate-400 hover:bg-white/5 hover:text-slate-200">
+            <span>&#9770; Sufi Sama & Whirling</span>
+            <span class="text-[10px] text-slate-500">1,760</span>
+          </button>
+          <button data-category="Heaven God-Goddess" class="cat-sidebar-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-slate-400 hover:bg-white/5 hover:text-slate-200">
+            <span>&#10023; Heaven God-Goddess</span>
+            <span class="text-[10px] text-slate-500">1,820</span>
+          </button>
+          <button data-category="Symphony & Pop Cult" class="cat-sidebar-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-slate-400 hover:bg-white/5 hover:text-slate-200">
+            <span>&#127931; Symphony & Pop Cult</span>
+            <span class="text-[10px] text-slate-500">2,300</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Bottom Sovereign Mantra -->
+      <div class="mt-6 pt-3 border-t border-white/10 text-[11px] text-slate-400 space-y-1.5">
+        <div class="flex items-center gap-2 text-amber-300/90 font-royal">
+          <span>&#9813;</span>
+          <span>Sovereign Decree</span>
+        </div>
+        <p class="italic text-slate-400/90">
+          "Be still like a king upon an eternal throne; dissolve like a Sufi into the flute's breath."
+        </p>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT WORKSPACE -->
+    <main class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8">
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 1: 10,000 VIDEO VAULT (YOUTUBE-STYLE HOME FEED)                  -->
+      <!-- ===================================================================== -->
+      <section id="view-home" class="space-y-6">
+        <!-- Hero Sovereign Banner -->
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-abyss via-[#0b192c] to-[#1a1325] border border-white/10 p-6 sm:p-8 glow-biolume">
+          <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div class="max-w-2xl space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-biolume/10 border border-biolume/30 text-biolume text-xs font-medium">
+                <span>&#10022; ANOTHER WORLD &bull; AGGRESSIVELY CALM &bull; LEFT BEFORE PRESENT</span>
+              </div>
+              <h1 class="font-royal text-2xl sm:text-4xl font-bold text-white leading-tight">
+                Enter the <span class="text-transparent bg-clip-text bg-gradient-to-r from-biolume via-sky-300 to-amber-300">10,000 Sacred Streams</span> of Sovereign Stillness
+              </h1>
+              <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                Curated by <strong class="text-amber-300">Shah-e-Aether</strong>. Immerse in bioluminescent Pandora nights, mind-reset Bansuri flutes, celestial symphonies, mythic pop-cult lore, and the 19 Vault Cards.
+              </p>
+              <div class="flex flex-wrap items-center gap-3 pt-2">
+                <button id="heroPlayFirstBtn" class="px-5 py-2.5 rounded-full bg-biolume text-obsidian font-semibold text-sm hover:bg-teal-300 transition flex items-center gap-2 shadow-lg shadow-biolume/20">
+                  <span>&#9654;</span>
+                  <span>Begin Mind Reset Stream</span>
+                </button>
+                <button id="heroOpenVault19Btn" class="px-5 py-2.5 rounded-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/40 text-amber-200 font-royal text-sm transition">
+                  &#10022; Explore 19 Vault Cards
+                </button>
+              </div>
+            </div>
+
+            <!-- Live Archive Telemetry Card -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-3 shrink-0">
+              <div class="p-3.5 rounded-2xl bg-obsidian/70 border border-white/10 backdrop-blur-md">
+                <p class="text-[11px] text-slate-400 uppercase tracking-wider">Archived Streams</p>
+                <p id="totalVideoCounter" class="font-royal text-xl sm:text-2xl font-bold text-biolume mt-0.5">10,000</p>
+                <p class="text-[10px] text-teal-400/80 mt-0.5">Left Before Present</p>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-obsidian/70 border border-white/10 backdrop-blur-md">
+                <p class="text-[11px] text-slate-400 uppercase tracking-wider">Active Resonance</p>
+                <p class="font-royal text-xl sm:text-2xl font-bold text-amber-300 mt-0.5">432 Hz</p>
+                <p class="text-[10px] text-amber-200/70 mt-0.5">Aggressively Calm</p>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-obsidian/70 border border-white/10 backdrop-blur-md col-span-2 sm:col-span-1 lg:col-span-2">
+                <p class="text-[11px] text-slate-400 uppercase tracking-wider">Soul Reflections</p>
+                <p class="font-royal text-lg font-bold text-indigo-300 mt-0.5">5,000 Comments / Realm</p>
+                <p class="text-[10px] text-slate-400 mt-0.5">Sufi &bull; King &bull; Pop Cult</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Filter Chips (YouTube Style) -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+          <button data-chip="All" class="cat-chip active px-4 py-1.5 rounded-full text-xs font-medium bg-biolume text-obsidian whitespace-nowrap transition">
+            All 10,000 Streams
+          </button>
+          <button data-chip="Mind Reset Flute" class="cat-chip px-4 py-1.5 rounded-full text-xs font-medium bg-white/10 hover:bg-white/15 text-slate-200 whitespace-nowrap transition">
+            &#127926; Mind Reset Flute
+          </button>
+          <button data-chip="Avatar Biolume" class="cat-chip px-4 py-1.5 rounded-full text-xs font-medium bg-white/10 hover:bg-white/15 text-slate-200 whitespace-nowrap transition">
+            &#127793; Pandora Bioluminescence
+          </button>
+          <button data-chip="Heaven God-Goddess" class="cat-chip px-4 py-1.5 rounded-full text-xs font-medium bg-white/10 hover:bg-white/15 text-slate-200 whitespace-nowrap transition">
+            &#10023; Heaven God-Goddess Nature
+          </button>
+          <button data-chip="Symphony & Pop Cult" class="cat-chip px-4 py-1.5 rounded-full text-xs font-medium bg-white/10 hover:bg-white/15 text-slate-200 whitespace-nowrap transition">
+            &#127931; Symphony & Pop Cult Culture
+          </button>
+          <button data-chip="Sufi Mysticism" class="cat-chip px-4 py-1.5 rounded-full text-xs font-medium bg-white/10 hover:bg-white/15 text-slate-200 whitespace-nowrap transition">
+            &#9770; Sufi Royal Mysticism
+          </button>
+        </div>
+
+        <!-- Active Filter & Archive Status Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
+          <div>
+            Showing <span id="visibleCountLabel" class="text-white font-semibold">12</span> of <span id="filteredTotalLabel" class="text-biolume font-semibold">10,000</span> archived realms
+            <span id="activeFilterBadge" class="ml-2 px-2 py-0.5 rounded bg-white/10 text-slate-300">Realm: All</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>Era Timeline:</span>
+            <span class="text-amber-300 font-medium">12,000 BP &rarr; Eternal Present</span>
+          </div>
+        </div>
+
+        <!-- Video Grid -->
+        <div id="videoGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <!-- Dynamically populated by JS -->
+        </div>
+
+        <!-- Load More / Jump Across 10,000 Archive -->
+        <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button id="loadMoreVideosBtn" class="px-6 py-3 rounded-full bg-white/10 hover:bg-biolume/20 border border-white/15 hover:border-biolume/50 text-sm font-medium text-white transition flex items-center gap-2">
+            <span>Load Deeper into the 10,000 Archive</span>
+            <span class="text-biolume">&darr;</span>
+          </button>
+          <button id="randomJumpBtn" class="px-5 py-3 rounded-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-xs font-royal text-amber-200 transition">
+            &#10022; Quantum Jump to Random Video (#1 – #10,000)
+          </button>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 2: YOUTUBE-CLONE WATCH PLAYER, PLAYLIST & 5,000 COMMENTS         -->
+      <!-- ===================================================================== -->
+      <section id="view-watch" class="hidden space-y-6">
+        <!-- Back to Vault Breadcrumb -->
+        <div class="flex items-center justify-between">
+          <button id="backToVaultBtn" class="inline-flex items-center gap-2 text-xs sm:text-sm text-slate-300 hover:text-biolume transition">
+            <span>&larr;</span>
+            <span>Back to 10,000 Video Vault</span>
+          </button>
+          <span id="watchArchiveIdBadge" class="text-xs font-mono px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-400/30">
+            ARCHIVE #00001 // LEFT BEFORE PRESENT
+          </span>
+        </div>
+
+        <!-- Main Watch Layout: Left Player + Info + 5,000 Comments | Right Playlist Queue -->
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+
+          <!-- Left 8 Columns: Player + Metadata + 5,000 Comments -->
+          <div class="xl:col-span-8 space-y-5">
+
+            <!-- Generative Canvas Video Player Container -->
+            <div class="relative rounded-3xl overflow-hidden bg-black border border-white/15 ambient-player-glow group">
+              <div class="relative aspect-video w-full bg-obsidian">
+                <canvas id="playerCanvas" class="w-full h-full block"></canvas>
+
+                <!-- Top Overlay HUD inside Player -->
+                <div class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                  <div class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[11px] text-biolume flex items-center gap-2">
+                    <span id="playerLiveDot" class="w-2 h-2 rounded-full bg-biolume animate-pulse"></span>
+                    <span id="playerHudRealm">MIND RESET FLUTE &bull; 432 Hz</span>
+                  </div>
+                  <div class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/30 text-[11px] text-amber-200 font-royal">
+                    &#9813; SOVEREIGN CINEMA
+                  </div>
+                </div>
+
+                <!-- Center Big Play Overlay when Paused -->
+                <button id="playerCenterPlayBtn" class="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-biolume/90 hover:bg-biolume text-obsidian flex items-center justify-center shadow-2xl transition transform hover:scale-105">
+                  <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Custom YouTube-Style Sovereign Player Controls -->
+              <div class="bg-abyss/95 backdrop-blur-xl border-t border-white/10 p-3 sm:p-4 space-y-2.5">
+                <!-- Progress Scrubber -->
+                <div class="flex items-center gap-3">
+                  <span id="playerCurrentTime" class="text-[11px] font-mono text-slate-400 w-10">00:00</span>
+                  <input id="playerScrubber" type="range" min="0" max="100" value="0" class="flex-1 accent-biolume h-1.5 bg-white/15 rounded-lg cursor-pointer" />
+                  <span id="playerDuration" class="text-[11px] font-mono text-slate-400 w-10 text-right">11:11</span>
+                </div>
+
+                <!-- Control Buttons Row -->
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div class="flex items-center gap-2 sm:gap-3">
+                    <button id="playerPlayPauseBtn" class="p-2 rounded-full bg-biolume text-obsidian hover:bg-teal-300 transition" title="Play / Pause">
+                      <svg id="playPauseIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </button>
+
+                    <button id="playerNextBtn" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition" title="Next in Sovereign Playlist">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                      </svg>
+                    </button>
+
+                    <!-- Web Audio Synthesizer Toggle -->
+                    <button id="playerAudioToggleBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-teal-500/20 border border-biolume/40 text-biolume text-xs font-medium hover:bg-teal-500/30 transition">
+                      <span id="audioWaveIcon">&#128266;</span>
+                      <span id="audioStatusLabel">Flute & Symphony: ON</span>
+                    </button>
+
+                    <!-- Volume Slider -->
+                    <input id="playerVolumeSlider" type="range" min="0" max="100" value="70" class="hidden sm:block w-20 accent-amber-400 h-1 bg-white/15 rounded-lg cursor-pointer" title="Synth Volume" />
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <select id="playerSoundModeSelect" class="bg-obsidian border border-white/15 rounded-full px-3 py-1.5 text-xs text-amber-200 focus:outline-none">
+                      <option value="flute">Mode: Mind Reset Bansuri Flute</option>
+                      <option value="symphony">Mode: Celestial Heaven Symphony</option>
+                      <option value="sufi">Mode: Sufi Dervish Drone & Pulse</option>
+                      <option value="popcult">Mode: Ethereal Pop-Cult Synth</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video Title & YouTube Creator Action Bar -->
+            <div class="space-y-4">
+              <h1 id="watchTitle" class="font-royal text-xl sm:text-2xl font-bold text-white leading-snug">
+                Loading Sacred Stream...
+              </h1>
+
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+                <!-- Creator Profile (Sufi King YouTuber Persona) -->
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-500 via-biolume to-indigo-600 p-0.5 shrink-0">
+                    <div class="w-full h-full rounded-full bg-obsidian flex items-center justify-center text-amber-300 font-royal font-bold">
+                      &#9813;
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span id="watchChannelName" class="font-semibold text-sm text-amber-200">Shah-e-Aether // Sovereign Sufi</span>
+                      <span class="text-biolume text-xs">&#10004;</span>
+                    </div>
+                    <p class="text-xs text-slate-400">19.4M Soul Subscribers &bull; Left Before Present</p>
+                  </div>
+                  <button id="subscribeBtn" class="ml-2 px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-obsidian font-semibold text-xs transition">
+                    Subscribed &#9813;
+                  </button>
+                </div>
+
+                <!-- Like, Resonance Boost, Add to Playlist, Share -->
+                <div class="flex flex-wrap items-center gap-2">
+                  <button id="likeVideoBtn" class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/15 text-xs font-medium text-white transition">
+                    <span>&#10022;</span>
+                    <span id="watchLikeCount">142K</span>
+                  </button>
+                  <button id="addToQueueBtn" class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-biolume/15 hover:bg-biolume/25 border border-biolume/30 text-biolume text-xs font-medium transition">
+                    <span>+ Queue</span>
+                  </button>
+                  <button id="copyShareLinkBtn" class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/10 hover:bg-white/15 text-xs font-medium text-slate-200 transition">
+                    <span>Share Realm</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Collapsible Sovereign Lore Description Box -->
+              <div class="p-4 rounded-2xl bg-abyss/80 border border-white/10 space-y-2 text-xs sm:text-sm text-slate-300">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-semibold text-biolume">
+                  <span id="watchViews">1,408,912 views</span>
+                  <span>&bull;</span>
+                  <span id="watchEraTag">Recorded 9,400 Before Present</span>
+                  <span>&bull;</span>
+                  <span id="watchCardLinkTag" class="text-amber-300">Vault Card #07 Resonance</span>
+                </div>
+                <p id="watchDescription" class="leading-relaxed text-slate-300">
+                  Synthesized in the aggressively calm chambers of Pandora's Bioluminescent Canopy. Let the harmonic flute dissolve temporal anxiety while the royal symphony aligns the crown and heart.
+                </p>
+              </div>
+            </div>
+
+            <!-- =============================================================== -->
+            <!-- 5,000 COMMENTS ENGINE (VIRTUALIZED / PAGINATED STREAM)          -->
+            <!-- =============================================================== -->
+            <div class="pt-4 space-y-5">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <h2 class="font-royal text-lg sm:text-xl font-bold text-white">
+                    <span id="commentTotalCounter" class="text-biolume">5,000</span> Comments
+                  </h2>
+                  <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-white/10 text-slate-300">
+                    Sufi &bull; King &bull; Pop-Cult Archive
+                  </span>
+                </div>
+
+                <div class="flex items-center gap-2 text-xs">
+                  <span class="text-slate-400">Sort by:</span>
+                  <select id="commentSortSelect" class="bg-abyss border border-white/15 rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none">
+                    <option value="top">Top Sovereign Reflections</option>
+                    <option value="newest">Newest from the Ether</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Add a Comment as King/Creator -->
+              <form id="newCommentForm" class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-500 to-biolume p-0.5 shrink-0 mt-0.5">
+                  <div class="w-full h-full rounded-full bg-obsidian flex items-center justify-center text-amber-300 font-royal text-xs font-bold">
+                    &#9813;
+                  </div>
+                </div>
+                <div class="flex-1 space-y-2">
+                  <input
+                    id="newCommentInput"
+                    type="text"
+                    placeholder="Inscribe a reflection into the 5,000-comment scroll as Shah-e-Aether..."
+                    class="w-full bg-transparent border-b border-white/20 focus:border-biolume py-2 text-sm text-white placeholder-slate-500 focus:outline-none transition"
+                  />
+                  <div class="flex justify-end gap-2">
+                    <button type="submit" class="px-4 py-1.5 rounded-full bg-biolume text-obsidian font-semibold text-xs hover:bg-teal-300 transition">
+                      Inscribe Reflection
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Rendered Comments List -->
+              <div id="commentsList" class="space-y-4">
+                <!-- Populated dynamically from 5,000 procedural comment pool -->
+              </div>
+
+              <!-- Load More from 5,000 Comments -->
+              <div class="pt-2 flex items-center justify-between border-t border-white/10">
+                <span id="commentsShownStatus" class="text-xs text-slate-400">Showing 15 of 5,000 comments</span>
+                <button id="loadMoreCommentsBtn" class="px-4 py-2 rounded-full bg-white/10 hover:bg-biolume/20 text-xs font-medium text-biolume transition">
+                  Load More Reflections (5,000 Pool) &darr;
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right 4 Columns: Sovereign Playlist Queue & Up Next -->
+          <div class="xl:col-span-4 space-y-5">
+            <!-- Interactive Playlist Panel -->
+            <div class="rounded-3xl bg-abyss/90 border border-biolume/25 overflow-hidden glow-biolume">
+              <div class="p-4 bg-gradient-to-r from-teal-950/80 via-abyss to-amber-950/50 border-b border-white/10 flex items-center justify-between">
+                <div>
+                  <h3 class="font-royal text-sm font-bold text-amber-200 flex items-center gap-1.5">
+                    <span>&#9776;</span>
+                    <span>Sovereign Mind-Reset Playlist</span>
+                  </h3>
+                  <p class="text-[11px] text-slate-400 mt-0.5">
+                    Auto-flowing sanctuary &bull; <span id="playlistCountLabel">8</span> streams queued
+                  </p>
+                </div>
+                <button id="shufflePlaylistBtn" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-biolume/20 text-xs text-biolume transition" title="Shuffle Queue">
+                  &#8646; Shuffle
+                </button>
+              </div>
+
+              <div id="playlistQueueContainer" class="max-h-[420px] overflow-y-auto divide-y divide-white/5">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Related Realms from the 10,000 Vault -->
+            <div class="space-y-3">
+              <h4 class="font-royal text-xs uppercase tracking-widest text-slate-400 px-1">
+                More From Before Present (10,000 Vault)
+              </h4>
+              <div id="relatedVideosContainer" class="space-y-3">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 3: AUTO-CREATE GENERATIVE VIDEO STUDIO                           -->
+      <!-- ===================================================================== -->
+      <section id="view-studio" class="hidden space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-biolume font-semibold">Sovereign Creator Engine</span>
+            <h1 class="font-royal text-2xl sm:text-3xl font-bold text-white mt-1">
+              Auto-Create Sacred Audio-Visual Stream
+            </h1>
+            <p class="text-sm text-slate-400 mt-1">
+              Synthesize an aggressively calm video with procedural Pandora visuals, mind-reset flute harmonics, and publish it directly into the 10,000-video archive.
+            </p>
+          </div>
+          <button id="closeStudioBtn" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/15 text-xs text-slate-200 transition">
+            &larr; Return to Vault
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Studio Controls (Left 5 Cols) -->
+          <div class="lg:col-span-5 p-6 rounded-3xl bg-abyss/90 border border-white/10 space-y-5">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-amber-300 mb-2">
+                1. Choose Celestial Archetype
+              </label>
+              <div class="grid grid-cols-2 gap-2.5" id="studioPresetGrid">
+                <button type="button" data-preset="Mind Reset Flute" class="studio-preset-btn active p-3 rounded-2xl bg-biolume/20 border border-biolume text-left transition">
+                  <div class="text-base">&#127926;</div>
+                  <div class="text-xs font-semibold text-white mt-1">Mind Reset Flute</div>
+                  <div class="text-[10px] text-teal-200">432Hz Bansuri & Mist</div>
+                </button>
+                <button type="button" data-preset="Heaven God-Goddess" class="studio-preset-btn p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-400/50 text-left transition">
+                  <div class="text-base">&#10023;</div>
+                  <div class="text-xs font-semibold text-white mt-1">Heaven God-Goddess</div>
+                  <div class="text-[10px] text-slate-400">Solar Halo & Divine Choir</div>
+                </button>
+                <button type="button" data-preset="Symphony & Pop Cult" class="studio-preset-btn p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-400/50 text-left transition">
+                  <div class="text-base">&#127931;</div>
+                  <div class="text-xs font-semibold text-white mt-1">Symphony & Pop Cult</div>
+                  <div class="text-[10px] text-slate-400">Neon Mythos & Strings</div>
+                </button>
+                <button type="button" data-preset="Avatar Biolume" class="studio-preset-btn p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-teal-400/50 text-left transition">
+                  <div class="text-base">&#127793;</div>
+                  <div class="text-xs font-semibold text-white mt-1">Pandora Nightfall</div>
+                  <div class="text-[10px] text-slate-400">Bioluminescent Spores</div>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label for="studioTitleInput" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
+                2. Sovereign Title (Or Auto-Generate)
+              </label>
+              <div class="flex gap-2">
+                <input
+                  id="studioTitleInput"
+                  type="text"
+                  value="Crown of Stillness: 432Hz Sufi Flute in Pandora's Floating Valley"
+                  class="flex-1 bg-obsidian border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-biolume focus:outline-none"
+                />
+                <button type="button" id="randomizeTitleBtn" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs text-amber-200" title="Auto-Generate Poetic Title">
+                  &#10024;
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label for="studioCardSelect" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
+                3. Attune to Vault Nineteen Card
+              </label>
+              <select id="studioCardSelect" class="w-full bg-obsidian border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-amber-200 focus:border-amber-400 focus:outline-none">
+                <!-- Populated with the 19 cards -->
+              </select>
+            </div>
+
+            <div class="pt-2 flex flex-col sm:flex-row gap-3">
+              <button type="button" id="previewSynthBtn" class="flex-1 py-3 px-4 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-biolume border border-biolume/30 transition">
+                &#9654; Audition Live Synth
+              </button>
+              <button type="button" id="publishAutoVideoBtn" class="flex-1 py-3 px-4 rounded-full bg-gradient-to-r from-biolume to-amber-400 text-obsidian font-bold text-xs shadow-lg hover:opacity-95 transition">
+                &#10022; Auto-Create & Publish
+              </button>
+            </div>
+          </div>
+
+          <!-- Live Preview Canvas (Right 7 Cols) -->
+          <div class="lg:col-span-7 rounded-3xl overflow-hidden bg-black border border-biolume/30 flex flex-col justify-between glow-biolume">
+            <div class="relative aspect-video w-full bg-obsidian">
+              <canvas id="studioPreviewCanvas" class="w-full h-full block"></canvas>
+              <div class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-black/65 backdrop-blur-md text-[11px] text-amber-200 border border-amber-400/30">
+                Live Generative Preview &bull; Web Audio + Canvas Engine
+              </div>
+            </div>
+            <div class="p-4 bg-abyss border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+              <span>Output Resolution: <strong class="text-white">4K Celestial Procedural</strong></span>
+              <span>Archive Slot: <strong id="nextArchiveSlotLabel" class="text-biolume">#10,001</strong></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 4: ABOUT VAULT NINETEEN CARDS (19 SACRED COLLECTIBLE CARDS)      -->
+      <!-- ===================================================================== -->
+      <section id="view-vault19" class="hidden space-y-6">
+        <div class="rounded-3xl bg-gradient-to-r from-amber-950/40 via-abyss to-teal-950/40 border border-amber-400/30 p-6 sm:p-8 glow-gold">
+          <div class="max-w-3xl space-y-2">
+            <span class="text-xs font-royal uppercase tracking-widest text-amber-300">
+              &#10022; The Sacred Architecture &bull; Nineteen Immutable Keys
+            </span>
+            <h1 class="font-royal text-2xl sm:text-4xl font-bold text-white">
+              About Vault Nineteen Cards
+            </h1>
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+              Before Present, the Sovereign Sufi Kings encoded all 10,000 audiovisual realms into <strong class="text-amber-300">19 Sacred Vault Cards</strong>. Click any card below to reveal its celestial frequency, deity-nature archetype, and summon a custom auto-created stream attuned to its essence.
+            </p>
+          </div>
+        </div>
+
+        <!-- Grid of 19 Interactive Cards -->
+        <div id="vault19Grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+          <!-- Populated dynamically with all 19 cards -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- NON-INTRUSIVE TOAST NOTIFICATION BANNER -->
+  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 translate-y-24 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="px-5 py-3 rounded-2xl bg-abyss/95 backdrop-blur-xl border border-biolume/50 text-sm text-white shadow-2xl flex items-center gap-3 glow-biolume">
+      <span class="text-biolume text-lg">&#10022;</span>
+      <span id="toastMessage">Realm attuned.</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- APPLICATION LOGIC: 10K ARCHIVE, 5K COMMENTS, 19 CARDS, AUDIO/VISUAL SYNTH -->
+  <!-- ========================================================================= -->
+  <script>
+    (function () {
+      'use strict';
+
+      // -----------------------------------------------------------------------
+      // 1. DATA: THE 19 SACRED VAULT CARDS ("ABOUT VAULT NINETEEN CARD")
+      // -----------------------------------------------------------------------
+      const VAULT_19_CARDS = [
+        { num: 1, name: "The Sovereign Origin", subtitle: "Al-Awwal • First Breath", hz: "432 Hz", realm: "Mind Reset Flute", symbol: "♛", color: "from-amber-500/30 to-teal-900/40", lore: "The silent throne before time began. Restores royal composure and dissolves mental static." },
+        { num: 2, name: "Eywa's Biolume Heart", subtitle: "Pandora Canopy Pulse", hz: "528 Hz", realm: "Avatar Biolume", symbol: "✾", color: "from-teal-500/30 to-emerald-900/40", lore: "Every glowing root connects to the ancestral memory tree in bioluminescent stillness." },
+        { num: 3, name: "Ney's Reed Breath", subtitle: "Sufi Hollow Flute", hz: "396 Hz", realm: "Mind Reset Flute", symbol: "❁", color: "from-sky-500/30 to-indigo-900/40", lore: "Carved from river reed; when emptied of ego, the wind of heaven plays through it." },
+        { num: 4, name: "Celestial Goddess Aurora", subtitle: "Noor-us-Sama • Sky Mother", hz: "639 Hz", realm: "Heaven God-Goddess", symbol: "✧", color: "from-fuchsia-500/25 to-indigo-900/40", lore: "Drapes the night sky in liquid emerald silk, blessing dreamers with fearless calm." },
+        { num: 5, name: "Lord of Floating Peaks", subtitle: "Hallelujah Sky Sovereign", hz: "741 Hz", realm: "Avatar Biolume", symbol: "▲", color: "from-cyan-500/30 to-slate-900/50", lore: "Mountains suspended by magnetic grace, untouched by gravity or worldly haste." },
+        { num: 6, name: "The Whirling Horizon", subtitle: "Sama of the 7 Spheres", hz: "852 Hz", realm: "Sufi Mysticism", symbol: "۞", color: "from-amber-500/30 to-purple-900/40", lore: "One hand raised to heaven, one turned to earth; spinning in motionless peace." },
+        { num: 7, name: "Pop-Cult Oracle", subtitle: "Mythos of Neon Gods", hz: "444 Hz", realm: "Symphony & Pop Cult", symbol: "◈", color: "from-indigo-500/30 to-pink-900/40", lore: "Where ancient temple hymns fuse with cinema synthwaves and timeless pop archetypes." },
+        { num: 8, name: "Emerald River Deity", subtitle: "Kausar • Living Waters", hz: "417 Hz", realm: "Heaven God-Goddess", symbol: "≈", color: "from-emerald-500/30 to-teal-950/50", lore: "Waters flowing uphill before present, washing away centuries of inherited noise." },
+        { num: 9, name: "Crown of Aggressively Calm", subtitle: "Taj-as-Sakina", hz: "432 Hz", realm: "Sufi Mysticism", symbol: "♔", color: "from-yellow-500/30 to-amber-950/50", lore: "A peace so absolute and majestic that storms bow down upon entering its perimeter." },
+        { num: 10, name: "Symphony of Astral Strings", subtitle: "Philharmonic Ether", hz: "963 Hz", realm: "Symphony & Pop Cult", symbol: "♫", color: "from-violet-500/30 to-slate-900/50", lore: "A thousand celestial cellos harmonizing with golden-era cinema leitmotifs." },
+        { num: 11, name: "Luminous Spore Messenger", subtitle: "Atokirina • Pure Spirit", hz: "528 Hz", realm: "Avatar Biolume", symbol: "✳", color: "from-teal-400/30 to-cyan-950/50", lore: "Weightless seeds of light descending upon those whose minds have become transparent." },
+        { num: 12, name: "Sun-King & Moon-Goddess", subtitle: "Shams & Qamar Union", hz: "639 Hz", realm: "Heaven God-Goddess", symbol: "☯", color: "from-amber-400/30 to-indigo-950/50", lore: "Solar authority wedded to lunar intuition in perpetual twilight equilibrium." },
+        { num: 13, name: "The Thirteenth Dervish", subtitle: "Qalandar of the Void", hz: "285 Hz", realm: "Sufi Mysticism", symbol: "☽", color: "from-purple-500/30 to-obsidian", lore: "Owns nothing, commands the cosmos; laughs gently at the illusion of urgency." },
+        { num: 14, name: "Bansuri of Vrindavan Mist", subtitle: "Midnight Lotus Flute", hz: "432 Hz", realm: "Mind Reset Flute", symbol: "❀", color: "from-sky-400/30 to-teal-950/50", lore: "Seven notes that pause the river's current and turn memory into pure starlight." },
+        { num: 15, name: "Cathedral of Coral & Gold", subtitle: "Atlantis Before Present", hz: "528 Hz", realm: "Heaven God-Goddess", symbol: "❖", color: "from-amber-500/25 to-cyan-900/40", lore: "Sunken sanctuaries where bioluminescent whales sing Gregorian and Sufi chants." },
+        { num: 16, name: "Retro-Future Monarch", subtitle: "Synthwave Sultan", hz: "440 Hz", realm: "Symphony & Pop Cult", symbol: "✦", color: "from-pink-500/25 to-indigo-950/50", lore: "Velvet robes, holographic crowns, and analog synthesizers echoing across velvet dunes." },
+        { num: 17, name: "Garden of Four Fountains", subtitle: "Chahar-Bagh Paradise", hz: "396 Hz", realm: "Heaven God-Goddess", symbol: "✥", color: "from-emerald-400/30 to-amber-950/40", lore: "Symmetrical heaven where pomegranate blossoms and peacocks guard the inner stillness." },
+        { num: 18, name: "The Silent Witness", subtitle: "Al-Basir • Mirror Lake", hz: "852 Hz", realm: "Mind Reset Flute", symbol: "◉", color: "from-blue-500/30 to-obsidian", lore: "Reflects all 10,000 realms without ripples; the observer behind every breath." },
+        { num: 19, name: "Seal of Nineteen", subtitle: "Khatam • Unity Code", hz: "963 Hz", realm: "Sufi Mysticism", symbol: "✸", color: "from-amber-400/35 via-teal-500/25 to-indigo-900/50", lore: "The master key uniting King, Sufi, Nature, and Pop-Cult into one unbroken ocean." }
+      ];
+
+      // -----------------------------------------------------------------------
+      // 2. PROCEDURAL 10,000-VIDEO ARCHIVE ENGINE
+      // -----------------------------------------------------------------------
+      const CATEGORIES = [
+        "Mind Reset Flute",
+        "Avatar Biolume",
+        "Heaven God-Goddess",
+        "Symphony & Pop Cult",
+        "Sufi Mysticism"
+      ];
+
+      const TITLE_PREFIXES = [
+        "Aggressively Calm:",
+        "Left Before Present:",
+        "Sovereign Reset:",
+        "Pandora Nightfall:",
+        "Sufi Sama Resonance:",
+        "Heaven God-Goddess:",
+        "Celestial Symphony:",
+        "Pop-Cult Mythos:",
+        "432Hz Royal Breath:",
+        "Vault Nineteen Echo:"
+      ];
+
+      const TITLE_CORES = [
+        "Bansuri Flute Beneath Bioluminescent Floating Mountains",
+        "Whirling Dervish & Velvet Synth Symphony in 432Hz",
+        "Goddess of the Emerald Canopy & Astral Harp Sanctuary",
+        "Sovereign King's Midnight Meditation Before Present",
+        "Eywa's Spirit Tree & Sacred Sufi Ney Harmonics",
+        "Cyber-Sufi Oud Meets Orchestral Pop-Cult Cinema",
+        "Temple of Heaven's Dawn Mist & Tibetan-Sufi Flute",
+        "Bioluminescent Ocean Choir of the Forgotten Epoch",
+        "Crown of Stillness: Deep Alpha-Theta Mind Reset",
+        "Golden Palace in the Clouds • Divine Nature & Strings"
+      ];
+
+      const ERAS = [
+        "11,400 Before Present",
+        "9,850 Before Present",
+        "7,200 Before Present",
+        "4,320 Before Present",
+        "10,000 BP • Timeless",
+        "Pandora Epoch 01"
+      ];
+
+      // Custom generated videos added by user via Auto-Create Studio
+      const customVideos = [];
+      const TOTAL_ARCHIVE_SIZE = 10000;
+
+      // Deterministic pseudo-random helper so any video #1..#10000 is consistent
+      function seededRand(seed) {
+        const x = Math.sin(seed * 9301 + 49297) * 233280;
+        return x - Math.floor(x);
+      }
+
+      function getVideoById(id) {
+        // Check custom created videos first
+        const custom = customVideos.find(v => v.id === id);
+        if (custom) return custom;
+
+        const catIndex = id % CATEGORIES.length;
+        const category = CATEGORIES[catIndex];
+        const prefix = TITLE_PREFIXES[id % TITLE_PREFIXES.length];
+        const core = TITLE_CORES[Math.floor(seededRand(id) * TITLE_CORES.length)];
+        const card = VAULT_19_CARDS[id % VAULT_19_CARDS.length];
+        const era = ERAS[id % ERAS.length];
+
+        const mins = 11 + (id % 48);
+        const secs = String((id * 17) % 60).padStart(2, '0');
+        const viewsNum = Math.floor(120000 + seededRand(id + 7) * 4800000);
+        const likesNum = Math.floor(viewsNum * 0.085);
+
+        const hue1 = Math.floor(seededRand(id + 1) * 360);
+        const hue2 = (hue1 + 55) % 360;
+
+        return {
+          id,
+          code: `#${String(id).padStart(5, '0')}`,
+          title: `${prefix} ${core}`,
+          category,
+          channel: id % 2 === 0 ? "Shah-e-Aether // Sovereign Sufi" : "Pandora & Heaven Archives",
+          duration: `${mins}:${secs}`,
+          viewsFormatted: `${(viewsNum / 1000000).toFixed(2)}M views`,
+          likesFormatted: `${Math.floor(likesNum / 1000)}K`,
+          era,
+          cardNum: card.num,
+          cardName: card.name,
+          hz: card.hz,
+          hue1,
+          hue2,
+          description: `Archived Realm ${String(id).padStart(5, '0')} (${era}). Attuned to Vault Card #${card.num} (${card.name} • ${card.hz}). Crafted to induce an aggressively calm sovereign state through ${category.toLowerCase()}, sacred nature harmonics, and timeless mythic beauty.`
+        };
+      }
+
+      // -----------------------------------------------------------------------
+      // 3. 5,000 COMMENTS GENERATOR ENGINE
+      // -----------------------------------------------------------------------
+      const COMMENT_AUTHORS = [
+        "RumiOfPandora", "Sovereign_Lotus", "NeyFluteWanderer", "GoddessAurora99",
+        "DervishInTheEther", "KingOfStillness", "BiolumeSoul_19", "CineSymphonyMystic",
+        "BeforePresentNomad", "Shahzadi_Noor", "AstralBansuri", "PopCultOracle",
+        "EmeraldCanopy7", "SufiNeonKnight", "SilenceAlchemist", "VaultNineteenKeeper"
+      ];
+
+      const COMMENT_BODIES = [
+        "That 432Hz flute entry just reset my entire nervous system. Aggressively calm indeed.",
+        "Feels like sitting on a golden throne inside Pandora's glowing forest while Rumi recites poetry.",
+        "I have been exploring the 10,000 archive since midnight—this realm (#{ID}) is pure heaven.",
+        "The blend of celestial symphony and subtle pop-cult nostalgia hits straight in the soul.",
+        "Like a king who has conquered the world and chosen silence. Pure Sufi majesty.",
+        "When the harmonic drone shifts at 03:33, my entire room felt filled with bioluminescent mist.",
+        "Vault Card #{CARD} energy is undeniable here. Left Before Present never felt so alive.",
+        "My mind was racing at 1000 mph; three breaths into this flute melody and everything became still water.",
+        "Goddess-tier nature visuals paired with royal Sufi acoustics. Best sanctuary on the web.",
+        "Listening from the threshold of sleep—thank you Shah-e-Aether for archiving all 10,000 realms."
+      ];
+
+      const userAddedComments = [];
+
+      function getCommentAtIndex(index, video) {
+        if (index < userAddedComments.length) {
+          return userAddedComments[index];
+        }
+        const adj = index - userAddedComments.length;
+        const seed = video.id * 5000 + adj;
+        const author = COMMENT_AUTHORS[adj % COMMENT_AUTHORS.length];
+        const rawBody = COMMENT_BODIES[Math.floor(seededRand(seed) * COMMENT_BODIES.length)];
+        const text = rawBody
+          .replace('{ID}', video.code)
+          .replace('{CARD}', String(video.cardNum).padStart(2, '0'));
+        const likes = Math.floor(12 + seededRand(seed + 3) * 2400);
+        const timeAgo = adj < 20 ? `${adj + 2} mins ago` : `${(adj % 11) + 1} epochs BP`;
+
+        return {
+          author: `@${author}_${(adj % 89) + 10}`,
+          badge: adj % 5 === 0 ? "Sufi Sovereign" : (adj % 3 === 0 ? "Vault 19" : null),
+          text,
+          likes,
+          timeAgo,
+          isCreator: false
+        };
+      }
+
+      // -----------------------------------------------------------------------
+      // 4. WEB AUDIO API GENERATIVE SYNTHESIZER (FLUTE, SYMPHONY, SUFI, POP-CULT)
+      // -----------------------------------------------------------------------
+      class SovereignAudioEngine {
+        constructor() {
+          this.ctx = null;
+          this.masterGain = null;
+          this.isEnabled = true;
+          this.isPlaying = false;
+          this.mode = 'flute'; // 'flute' | 'symphony' | 'sufi' | 'popcult'
+          this.volume = 0.7;
+          this.noteTimer = null;
+          this.droneOscs = [];
+        }
+
+        init() {
+          if (this.ctx) return;
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioCtx();
+          this.masterGain = this.ctx.createGain();
+          this.masterGain.gain.value = this.volume * 0.35;
+          this.masterGain.connect(this.ctx.destination);
+        }
+
+        start(mode) {
+          if (mode) this.mode = mode;
+          if (!this.isEnabled) return;
+          this.init();
+          if (this.ctx.state === 'suspended') {
+            this.ctx.resume();
+          }
+          if (this.isPlaying) return;
+          this.isPlaying = true;
+          this.startDrone();
+          this.scheduleMelodicNotes();
+        }
+
+        stop() {
+          this.isPlaying = false;
+          if (this.noteTimer) {
+            clearInterval(this.noteTimer);
+            this.noteTimer = null;
+          }
+          this.droneOscs.forEach(osc => {
+            try { osc.stop(); osc.disconnect(); } catch (e) {}
+          });
+          this.droneOscs = [];
+        }
+
+        setMode(newMode) {
+          this.mode = newMode;
+          if (this.isPlaying) {
+            this.stop();
+            this.start(newMode);
+          }
+        }
+
+        setVolume(val) {
+          this.volume = val;
+          if (this.masterGain && this.ctx) {
+            this.masterGain.gain.setTargetAtTime(this.isEnabled ? val * 0.35 : 0, this.ctx.currentTime, 0.08);
+          }
+        }
+
+        toggleMute() {
+          this.isEnabled = !this.isEnabled;
+          if (this.masterGain && this.ctx) {
+            this.masterGain.gain.setTargetAtTime(this.isEnabled ? this.volume * 0.35 : 0, this.ctx.currentTime, 0.08);
+          }
+          if (this.isEnabled && !this.isPlaying) {
+            this.start(this.mode);
+          }
+          return this.isEnabled;
+        }
+
+        startDrone() {
+          if (!this.ctx) return;
+          const now = this.ctx.currentTime;
+          // 432Hz-inspired calming root frequencies (D3 = 144Hz, A3 = 216Hz)
+          const freqs = this.mode === 'popcult' ? [130.81, 196.00] : [144.0, 216.0];
+          freqs.forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            const filter = this.ctx.createBiquadFilter();
+
+            osc.type = idx === 0 ? 'sine' : 'triangle';
+            osc.frequency.setValueAtTime(freq, now);
+
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(340, now);
+
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.exponentialRampToValueAtTime(idx === 0 ? 0.22 : 0.10, now + 2.0);
+
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(now);
+            this.droneOscs.push(osc);
+          });
+        }
+
+        scheduleMelodicNotes() {
+          // Pentatonic / Hijaz Sufi / Lydian Celestial scales tuned around 432Hz
+          const scales = {
+            flute: [288, 324, 360, 432, 486, 576, 648],       // Soothing Bansuri pentatonic
+            symphony: [288, 360, 432, 540, 576, 648, 864],    // Lush Celestial Lydian
+            sufi: [288, 306, 360, 384, 432, 460, 576],        // Mystical Hijaz / Sufi Ney
+            popcult: [261.63, 329.63, 392.00, 493.88, 523.25, 659.25] // Dreamy Synthwave
+          };
+
+          const triggerNote = () => {
+            if (!this.isPlaying || !this.ctx || !this.isEnabled) return;
+            const now = this.ctx.currentTime;
+            const scale = scales[this.mode] || scales.flute;
+            const freq = scale[Math.floor(Math.random() * scale.length)];
+
+            const osc = this.ctx.createOscillator();
+            const vibrato = this.ctx.createOscillator();
+            const vibratoGain = this.ctx.createGain();
+            const env = this.ctx.createGain();
+
+            osc.type = this.mode === 'popcult' ? 'triangle' : 'sine';
+            osc.frequency.setValueAtTime(freq, now);
+
+            // Gentle breath vibrato for Mind Reset Flute feel
+            vibrato.frequency.setValueAtTime(4.5, now);
+            vibratoGain.gain.setValueAtTime(this.mode === 'flute' ? 3.5 : 1.5, now);
+            vibrato.connect(vibratoGain);
+            vibratoGain.connect(osc.frequency);
+
+            const dur = 2.6 + Math.random() * 1.8;
+            env.gain.setValueAtTime(0.0001, now);
+            env.gain.exponentialRampToValueAtTime(0.24, now + 0.55);
+            env.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+            osc.connect(env);
+            env.connect(this.masterGain);
+
+            osc.start(now);
+            vibrato.start(now);
+            osc.stop(now + dur + 0.1);
+            vibrato.stop(now + dur + 0.1);
+          };
+
+          triggerNote();
+          this.noteTimer = setInterval(triggerNote, 2100);
+        }
+      }
+
+      const audioEngine = new SovereignAudioEngine();
+
+      // -----------------------------------------------------------------------
+      // 5. PROCEDURAL PANDORA / CELESTIAL / SUFI CANVAS VISUALIZER
+      // -----------------------------------------------------------------------
+      class CelestialCanvasRenderer {
+        constructor(canvasEl) {
+          this.canvas = canvasEl;
+          this.ctx = canvasEl ? canvasEl.getContext('2d') : null;
+          this.particles = [];
+          this.hue1 = 172; // Biolume teal
+          this.hue2 = 42;  // Royal gold
+          this.category = 'Mind Reset Flute';
+          this.t = 0;
+          this.animId = null;
+          this.initParticles();
+        }
+
+        initParticles() {
+          this.particles = [];
+          for (let i = 0; i < 65; i++) {
+            this.particles.push({
+              x: Math.random(),
+              y: Math.random(),
+              r: 1.2 + Math.random() * 3.5,
+              vx: (Math.random() - 0.5) * 0.0008,
+              vy: -0.0004 - Math.random() * 0.0012,
+              phase: Math.random() * Math.PI * 2
+            });
+          }
+        }
+
+        configure(video) {
+          if (!video) return;
+          this.hue1 = video.hue1 ?? 172;
+          this.hue2 = video.hue2 ?? 42;
+          this.category = video.category || 'Mind Reset Flute';
+        }
+
+        resize() {
+          if (!this.canvas) return;
+          const rect = this.canvas.getBoundingClientRect();
+          if (rect.width > 0 && rect.height > 0) {
+            this.canvas.width = rect.width * (window.devicePixelRatio || 1);
+            this.canvas.height = rect.height * (window.devicePixelRatio || 1);
+          }
+        }
+
+        drawFrame(isPlaying = true) {
+          if (!this.ctx || !this.canvas) return;
+          const w = this.canvas.width;
+          const h = this.canvas.height;
+          if (w === 0 || h === 0) return;
+
+          if (isPlaying) this.t += 0.014;
+
+          // Deep cosmic obsidian sky gradient
+          const bgGrad = this.ctx.createRadialGradient(
+            w * 0.5, h * 0.45, w * 0.05,
+            w * 0.5, h * 0.5, w * 0.75
+          );
+          bgGrad.addColorStop(0, `hsla(${this.hue1}, 65%, 14%, 1)`);
+          bgGrad.addColorStop(0.55, `hsla(${(this.hue1 + 40) % 360}, 55%, 7%, 1)`);
+          bgGrad.addColorStop(1, '#03060c');
+          this.ctx.fillStyle = bgGrad;
+          this.ctx.fillRect(0, 0, w, h);
+
+          // Sacred Sufi / Celestial Mandala Halo in Center
+          const cx = w * 0.5;
+          const cy = h * 0.48;
+          const baseRadius = Math.min(w, h) * 0.22;
+
+          this.ctx.save();
+          this.ctx.translate(cx, cy);
+          this.ctx.rotate(this.t * 0.15);
+
+          for (let ring = 0; ring < 3; ring++) {
+            const r = baseRadius * (0.65 + ring * 0.35) + Math.sin(this.t * 1.5 + ring) * 6;
+            this.ctx.beginPath();
+            this.ctx.arc(0, 0, r, 0, Math.PI * 2);
+            this.ctx.strokeStyle = ring % 2 === 0
+              ? `hsla(${this.hue1}, 90%, 65%, 0.28)`
+              : `hsla(${this.hue2}, 90%, 62%, 0.24)`;
+            this.ctx.lineWidth = 1.5;
+            this.ctx.stroke();
+
+            // Sacred geometry petals
+            const petals = 12;
+            for (let p = 0; p < petals; p++) {
+              const ang = (p / petals) * Math.PI * 2 + (ring % 2 === 0 ? this.t * 0.2 : -this.t * 0.2);
+              const px = Math.cos(ang) * r;
+              const py = Math.sin(ang) * r;
+              this.ctx.beginPath();
+              this.ctx.arc(px, py, 3 + ring, 0, Math.PI * 2);
+              this.ctx.fillStyle = `hsla(${ring === 1 ? this.hue2 : this.hue1}, 95%, 70%, 0.55)`;
+              this.ctx.fill();
+            }
+          }
+          this.ctx.restore();
+
+          // Bioluminescent Flowing Aurora Waves (Pandora & Flute Breath)
+          for (let wave = 0; wave < 3; wave++) {
+            this.ctx.beginPath();
+            for (let x = 0; x <= w; x += 12) {
+              const normX = x / w;
+              const y = h * (0.62 + wave * 0.08) +
+                Math.sin(normX * 6 + this.t * (1.1 + wave * 0.25) + wave) * (h * 0.045) +
+                Math.cos(normX * 3 - this.t * 0.7) * (h * 0.025);
+              if (x === 0) this.ctx.moveTo(x, y);
+              else this.ctx.lineTo(x, y);
+            }
+            this.ctx.strokeStyle = wave === 1
+              ? `hsla(${this.hue2}, 90%, 60%, 0.25)`
+              : `hsla(${this.hue1}, 95%, 60%, 0.30)`;
+            this.ctx.lineWidth = 2.2;
+            this.ctx.stroke();
+          }
+
+          // Floating Eywa / Pandora Bioluminescent Spores
+          this.particles.forEach(pt => {
+            if (isPlaying) {
+              pt.x += pt.vx + Math.sin(this.t + pt.phase) * 0.0004;
+              pt.y += pt.vy;
+              if (pt.y < -0.05) { pt.y = 1.05; pt.x = Math.random(); }
+              if (pt.x < 0) pt.x = 1;
+              if (pt.x > 1) pt.x = 0;
+            }
+            const glow = 0.45 + 0.55 * Math.sin(this.t * 2.4 + pt.phase);
+            const px = pt.x * w;
+            const py = pt.y * h;
+
+            this.ctx.beginPath();
+            this.ctx.arc(px, py, pt.r * (0.8 + glow * 0.5), 0, Math.PI * 2);
+            this.ctx.fillStyle = `hsla(${pt.phase > 3.14 ? this.hue1 : this.hue2}, 95%, 72%, ${glow * 0.85})`;
+            this.ctx.fill();
+          });
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // 6. APPLICATION STATE & DOM REFERENCES
+      // -----------------------------------------------------------------------
+      const state = {
+        currentView: 'home',       // 'home' | 'watch' | 'studio' | 'vault19'
+        selectedCategory: 'All',
+        searchQuery: '',
+        loadedLimit: 12,
+        activeVideo: getVideoById(1),
+        isPlaying: false,
+        progressPct: 0,
+        playlistIds: [1, 2, 3, 4, 5, 6, 7, 8],
+        commentsShown: 15,
+        commentSort: 'top',
+        studioPreset: 'Mind Reset Flute'
+      };
+
+      const playerRenderer = new CelestialCanvasRenderer(document.getElementById('playerCanvas'));
+      const studioRenderer = new CelestialCanvasRenderer(document.getElementById('studioPreviewCanvas'));
+
+      // Toast helper
+      let toastTimeout = null;
+      function showToast(msg) {
+        const banner = document.getElementById('toastBanner');
+        document.getElementById('toastMessage').textContent = msg;
+        banner.classList.remove('translate-y-24', 'opacity-0');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          banner.classList.add('translate-y-24', 'opacity-0');
+        }, 3200);
+      }
+
+      // -----------------------------------------------------------------------
+      // 7. VIEW NAVIGATION CONTROLLER
+      // -----------------------------------------------------------------------
+      function switchView(viewName) {
+        state.currentView = viewName;
+        ['home', 'watch', 'studio', 'vault19'].forEach(v => {
+          const el = document.getElementById(`view-${v}`);
+          if (el) el.classList.toggle('hidden', v !== viewName);
+        });
+
+        // Update sidebar active state
+        document.querySelectorAll('.nav-item').forEach(btn => {
+          const isMatch = btn.dataset.nav === viewName;
+          btn.classList.toggle('bg-biolume/15', isMatch);
+          btn.classList.toggle('text-biolume', isMatch);
+          btn.classList.toggle('border', isMatch);
+          btn.classList.toggle('border-biolume/30', isMatch);
+          btn.classList.toggle('text-slate-300', !isMatch);
+        });
+
+        // Close mobile sidebar if open
+        const sidebar = document.getElementById('leftSidebar');
+        if (window.innerWidth < 768) {
+          sidebar.classList.add('-translate-x-full');
+        }
+
+        if (viewName === 'watch') {
+          setTimeout(() => playerRenderer.resize(), 40);
+        } else if (viewName === 'studio') {
+          setTimeout(() => studioRenderer.resize(), 40);
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // -----------------------------------------------------------------------
+      // 8. RENDER 10,000 VIDEO VAULT GRID
+      // -----------------------------------------------------------------------
+      function getMatchingVideoIds(maxCount) {
+        const results = [];
+        const query = state.searchQuery.trim().toLowerCase();
+        const cat = state.selectedCategory;
+
+        // Include custom auto-created videos first
+        for (let i = customVideos.length - 1; i >= 0; i--) {
+          const v = customVideos[i];
+          const matchesCat = cat === 'All' || v.category === cat;
+          const matchesQuery = !query ||
+            v.title.toLowerCase().includes(query) ||
+            v.category.toLowerCase().includes(query) ||
+            v.code.toLowerCase().includes(query);
+          if (matchesCat && matchesQuery) {
+            results.push(v.id);
+          }
+        }
+
+        // Scan procedural 1..10,000 archive
+        for (let id = 1; id <= TOTAL_ARCHIVE_SIZE && results.length < maxCount; id++) {
+          const v = getVideoById(id);
+          const matchesCat = cat === 'All' || v.category === cat;
+          const matchesQuery = !query ||
+            v.title.toLowerCase().includes(query) ||
+            v.category.toLowerCase().includes(query) ||
+            v.cardName.toLowerCase().includes(query) ||
+            v.code.includes(query);
+          if (matchesCat && matchesQuery) {
+            results.push(id);
+          }
+        }
+        return results;
+      }
+
+      function renderVideoGrid() {
+        const grid = document.getElementById('videoGrid');
+        const ids = getMatchingVideoIds(state.loadedLimit);
+        const totalArchiveNow = TOTAL_ARCHIVE_SIZE + customVideos.length;
+
+        document.getElementById('totalVideoCounter').textContent = totalArchiveNow.toLocaleString();
+        document.getElementById('visibleCountLabel').textContent = ids.length.toLocaleString();
+        document.getElementById('filteredTotalLabel').textContent =
+          state.selectedCategory === 'All' && !state.searchQuery
+            ? totalArchiveNow.toLocaleString()
+            : `~${Math.floor(totalArchiveNow / (state.selectedCategory === 'All' ? 1 : 5)).toLocaleString()}`;
+        document.getElementById('activeFilterBadge').textContent =
+          `Realm: ${state.selectedCategory}${state.searchQuery ? ` • "${state.searchQuery}"` : ''}`;
+
+        if (ids.length === 0) {
+          grid.innerHTML = `
+            <div class="col-span-full p-12 rounded-3xl bg-abyss/80 border border-white/10 text-center space-y-3">
+              <p class="font-royal text-xl text-amber-200">No Streams Found in This Frequency</p>
+              <p class="text-sm text-slate-400">Clear your search or auto-create a new realm in the Sovereign Studio.</p>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = ids.map(id => {
+          const v = getVideoById(id);
+          return `
+            <article data-video-id="${v.id}" class="video-card group cursor-pointer rounded-2xl bg-abyss/70 hover:bg-abyss border border-white/10 hover:border-biolume/40 overflow-hidden transition duration-300 flex flex-col">
+              <!-- Procedural Thumbnail Art -->
+              <div class="relative aspect-video w-full overflow-hidden" style="background: radial-gradient(circle at 30% 30%, hsla(${v.hue1}, 75%, 24%, 1), hsla(${v.hue2}, 65%, 10%, 1) 70%, #03060c 100%);">
+                <!-- Sacred Geometry Ring SVG -->
+                <svg class="absolute inset-0 w-full h-full opacity-45 group-hover:scale-110 transition duration-700" viewBox="0 0 320 180" fill="none">
+                  <circle cx="160" cy="90" r="54" stroke="hsla(${v.hue1}, 95%, 70%, 0.5)" stroke-width="1"/>
+                  <circle cx="160" cy="90" r="36" stroke="hsla(${v.hue2}, 95%, 68%, 0.6)" stroke-width="1" stroke-dasharray="4 4"/>
+                  <polygon points="160,42 202,114 118,114" stroke="hsla(${v.hue2}, 95%, 75%, 0.45)" stroke-width="1"/>
+                  <circle cx="72" cy="46" r="2.5" fill="#00f5d4"/>
+                  <circle cx="248" cy="132" r="3" fill="#fde68a"/>
+                </svg>
+
+                <!-- Top Badges -->
+                <div class="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded-md bg-black/65 backdrop-blur-md text-[10px] font-mono text-amber-200 border border-amber-400/25">
+                    ${v.code}
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-black/65 backdrop-blur-md text-[10px] text-biolume border border-biolume/25">
+                    ${v.hz}
+                  </span>
+                </div>
+
+                <!-- Bottom Duration & Card Pill -->
+                <div class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-black/70 text-[10px] text-slate-200">
+                    Card #${String(v.cardNum).padStart(2, '0')}
+                  </span>
+                  <span class="px-2 py-0.5 rounded bg-black/80 text-[11px] font-mono text-white">
+                    ${v.duration}
+                  </span>
+                </div>
+
+                <!-- Hover Play Indicator -->
+                <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                  <div class="w-12 h-12 rounded-full bg-biolume text-obsidian flex items-center justify-center shadow-xl">
+                    <svg class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card Details -->
+              <div class="p-3.5 flex-1 flex flex-col justify-between space-y-2.5">
+                <div class="flex items-start gap-2.5">
+                  <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500/40 to-biolume/40 border border-amber-300/40 flex items-center justify-center text-amber-200 font-royal text-xs shrink-0 mt-0.5">
+                    &#9813;
+                  </div>
+                  <div class="min-w-0">
+                    <h3 class="text-sm font-semibold text-slate-100 group-hover:text-biolume transition line-clamp-2 leading-snug">
+                      ${v.title}
+                    </h3>
+                    <p class="text-[11px] text-slate-400 mt-1 truncate">${v.channel}</p>
+                    <p class="text-[11px] text-slate-500 mt-0.5">
+                      ${v.viewsFormatted} &bull; ${v.era}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px]">
+                  <span class="px-2 py-0.5 rounded-full bg-white/5 text-teal-200">${v.category}</span>
+                  <button type="button" data-queue-id="${v.id}" class="quick-queue-btn text-slate-400 hover:text-amber-300 font-medium transition">
+                    + Playlist
+                  </button>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      // -----------------------------------------------------------------------
+      // 9. WATCH PLAYER, PLAYLIST QUEUE & 5,000 COMMENTS RENDERING
+      // -----------------------------------------------------------------------
+      function openVideoInPlayer(videoId, autoStart = true) {
+        const v = getVideoById(videoId);
+        state.activeVideo = v;
+        state.progressPct = 0;
+        state.commentsShown = 15;
+
+        // Ensure video is in playlist
+        if (!state.playlistIds.includes(v.id)) {
+          state.playlistIds.unshift(v.id);
+        }
+
+        // Update Watch UI
+        document.getElementById('watchArchiveIdBadge').textContent =
+          `ARCHIVE ${v.code} // ${v.era.toUpperCase()}`;
+        document.getElementById('playerHudRealm').textContent =
+          `${v.category.toUpperCase()} • ${v.hz}`;
+        document.getElementById('playerDuration').textContent = v.duration;
+        document.getElementById('watchTitle').textContent = v.title;
+        document.getElementById('watchChannelName').textContent = v.channel;
+        document.getElementById('watchLikeCount').textContent = v.likesFormatted;
+        document.getElementById('watchViews').textContent = v.viewsFormatted;
+        document.getElementById('watchEraTag').textContent = `Recorded ${v.era}`;
+        document.getElementById('watchCardLinkTag').textContent =
+          `Vault Card #${String(v.cardNum).padStart(2, '0')}: ${v.cardName}`;
+        document.getElementById('watchDescription').textContent = v.description;
+
+        // Map category to audio mode
+        const modeMap = {
+          'Mind Reset Flute': 'flute',
+          'Heaven God-Goddess': 'symphony',
+          'Symphony & Pop Cult': 'popcult',
+          'Sufi Mysticism': 'sufi',
+          'Avatar Biolume': 'flute'
+        };
+        const targetMode = modeMap[v.category] || 'flute';
+        document.getElementById('playerSoundModeSelect').value = targetMode;
+
+        playerRenderer.configure(v);
+        switchView('watch');
+        renderPlaylistQueue();
+        renderRelatedVideos();
+        renderComments();
+
+        if (autoStart) {
+          setPlayingState(true, targetMode);
+        } else {
+          setPlayingState(false, targetMode);
+        }
+      }
+
+      function setPlayingState(playing, modeOverride) {
+        state.isPlaying = playing;
+        const centerBtn = document.getElementById('playerCenterPlayBtn');
+        const icon = document.getElementById('playPauseIcon');
+
+        if (playing) {
+          centerBtn.classList.add('hidden');
+          icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+          audioEngine.start(modeOverride || document.getElementById('playerSoundModeSelect').value);
+        } else {
+          centerBtn.classList.remove('hidden');
+          icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+          audioEngine.stop();
+        }
+      }
+
+      function renderPlaylistQueue() {
+        const container = document.getElementById('playlistQueueContainer');
+        document.getElementById('playlistCountLabel').textContent = state.playlistIds.length;
+
+        container.innerHTML = state.playlistIds.map((id, idx) => {
+          const v = getVideoById(id);
+          const isCurrent = v.id === state.activeVideo.id;
+          return `
+            <div data-play-queue-id="${v.id}" class="playlist-item flex items-center gap-3 p-3 cursor-pointer transition ${isCurrent ? 'bg-biolume/15 border-l-2 border-biolume' : 'hover:bg-white/5'}">
+              <span class="text-xs font-mono ${isCurrent ? 'text-biolume font-bold' : 'text-slate-500'} w-5">
+                ${isCurrent ? '▶' : idx + 1}
+              </span>
+              <div class="w-16 h-10 rounded-lg shrink-0 flex items-center justify-center text-[10px] font-mono text-white border border-white/10"
+                   style="background: linear-gradient(135deg, hsla(${v.hue1}, 70%, 25%, 1), hsla(${v.hue2}, 70%, 15%, 1));">
+                ${v.code}
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="text-xs font-medium ${isCurrent ? 'text-biolume' : 'text-slate-200'} truncate">
+                  ${v.title}
+                </p>
+                <p class="text-[10px] text-slate-400 truncate">
+                  ${v.category} &bull; ${v.duration}
+                </p>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function renderRelatedVideos() {
+        const container = document.getElementById('relatedVideosContainer');
+        const baseId = state.activeVideo.id;
+        const relatedIds = [baseId + 1, baseId + 7, baseId + 19, baseId + 42, baseId + 108]
+          .map(n => ((n - 1) % TOTAL_ARCHIVE_SIZE) + 1);
+
+        container.innerHTML = relatedIds.map(id => {
+          const v = getVideoById(id);
+          return `
+            <div data-related-id="${v.id}" class="related-item flex gap-3 p-2 rounded-2xl hover:bg-white/5 cursor-pointer transition group">
+              <div class="w-28 aspect-video rounded-xl shrink-0 relative overflow-hidden border border-white/10 flex items-end justify-end p-1.5"
+                   style="background: radial-gradient(circle, hsla(${v.hue1}, 75%, 24%, 1), #04070d);">
+                <span class="px-1.5 py-0.5 rounded bg-black/75 text-[10px] font-mono text-white">${v.duration}</span>
+              </div>
+              <div class="min-w-0 flex-1 space-y-1">
+                <h5 class="text-xs font-semibold text-slate-200 group-hover:text-biolume line-clamp-2 leading-snug">
+                  ${v.title}
+                </h5>
+                <p class="text-[10px] text-slate-400">${v.channel}</p>
+                <p class="text-[10px] text-slate-500">${v.viewsFormatted} &bull; ${v.code}</p>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function renderComments() {
+        const list = document.getElementById('commentsList');
+        const total = 5000 + userAddedComments.length;
+        document.getElementById('commentTotalCounter').textContent = total.toLocaleString();
+        document.getElementById('commentsShownStatus').textContent =
+          `Showing ${state.commentsShown} of ${total.toLocaleString()} comments`;
+
+        const html = [];
+        for (let i = 0; i < state.commentsShown; i++) {
+          const idx = state.commentSort === 'newest' ? i : i * 3;
+          const c = getCommentAtIndex(idx, state.activeVideo);
+          html.push(`
+            <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/5">
+              <div class="w-8 h-8 rounded-full ${c.isCreator ? 'bg-gradient-to-tr from-amber-400 to-biolume text-obsidian font-bold' : 'bg-white/10 text-teal-200'} flex items-center justify-center text-xs shrink-0">
+                ${c.isCreator ? '♛' : c.author.charAt(1).toUpperCase()}
+              </div>
+              <div class="flex-1 min-w-0 space-y-1">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-xs font-semibold ${c.isCreator ? 'text-amber-300' : 'text-slate-200'}">${c.author}</span>
+                  ${c.badge ? `<span class="px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-400/30 text-[10px]">${c.badge}</span>` : ''}
+                  <span class="text-[11px] text-slate-500">${c.timeAgo}</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${c.text}</p>
+                <div class="flex items-center gap-4 pt-1 text-[11px] text-slate-400">
+                  <button type="button" class="hover:text-biolume transition">&#10022; ${c.likes}</button>
+                  <button type="button" class="hover:text-white transition">Reply</button>
+                </div>
+              </div>
+            </div>
+          `);
+        }
+        list.innerHTML = html.join('');
+      }
+
+      // -----------------------------------------------------------------------
+      // 10. RENDER "ABOUT VAULT NINETEEN CARDS"
+      // -----------------------------------------------------------------------
+      function renderVault19Cards() {
+        const grid = document.getElementById('vault19Grid');
+        const select = document.getElementById('studioCardSelect');
+
+        grid.innerHTML = VAULT_19_CARDS.map(card => `
+          <div data-card-num="${card.num}" class="vault-card group cursor-pointer rounded-3xl bg-gradient-to-br ${card.color} border border-amber-400/30 hover:border-biolume p-5 flex flex-col justify-between min-h-[270px] transition duration-300 hover:-translate-y-1 glow-gold">
+            <div class="flex items-center justify-between">
+              <span class="font-royal text-xs font-bold px-2.5 py-1 rounded-full bg-black/50 text-amber-300 border border-amber-400/30">
+                CARD ${String(card.num).padStart(2, '0')} / 19
+              </span>
+              <span class="text-[11px] font-mono text-biolume">${card.hz}</span>
+            </div>
+
+            <div class="my-4 text-center space-y-2">
+              <div class="w-14 h-14 mx-auto rounded-2xl bg-black/45 border border-white/15 flex items-center justify-center text-2xl text-amber-200 group-hover:scale-110 group-hover:text-biolume transition">
+                ${card.symbol}
+              </div>
+              <h3 class="font-royal text-base font-bold text-white leading-snug">
+                ${card.name}
+              </h3>
+              <p class="text-[11px] uppercase tracking-wider text-teal-200/90">
+                ${card.subtitle}
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <p class="text-xs text-slate-300/90 leading-relaxed line-clamp-3">
+                ${card.lore}
+              </p>
+              <button type="button" data-summon-card="${card.num}" class="summon-card-btn w-full py-2 rounded-xl bg-black/55 hover:bg-biolume hover:text-obsidian border border-white/15 text-xs font-semibold text-amber-200 transition">
+                &#9654; Summon Realm Stream
+              </button>
+            </div>
+          </div>
+        `).join('');
+
+        // Populate Studio Card Selector
+        select.innerHTML = VAULT_19_CARDS.map(c =>
+          `<option value="${c.num}">Card #${String(c.num).padStart(2, '0')} — ${c.name} (${c.hz})</option>`
+        ).join('');
+      }
+
+      // -----------------------------------------------------------------------
+      // 11. EVENT LISTENERS & INTERACTIONS
+      // -----------------------------------------------------------------------
+      // Sidebar mobile toggle
+      document.getElementById('sidebarToggleBtn').addEventListener('click', () => {
+        document.getElementById('leftSidebar').classList.toggle('-translate-x-full');
+      });
+
+      // Brand Home click
+      document.getElementById('brandHomeBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        switchView('home');
+      });
+
+      // Sidebar view navigation
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.addEventListener('click', () => switchView(btn.dataset.nav));
+      });
+
+      // Category filtering (Sidebar & Top Chips)
+      function applyCategoryFilter(cat) {
+        state.selectedCategory = cat;
+        state.loadedLimit = 12;
+
+        document.querySelectorAll('.cat-chip').forEach(chip => {
+          const active = chip.dataset.chip === cat;
+          chip.classList.toggle('bg-biolume', active);
+          chip.classList.toggle('text-obsidian', active);
+          chip.classList.toggle('bg-white/10', !active);
+          chip.classList.toggle('text-slate-200', !active);
+        });
+
+        document.querySelectorAll('.cat-sidebar-btn').forEach(btn => {
+          const active = btn.dataset.category === cat;
+          btn.classList.toggle('bg-white/10', active);
+          btn.classList.toggle('text-white', active);
+          btn.classList.toggle('text-slate-400', !active);
+        });
+
+        switchView('home');
+        renderVideoGrid();
+      }
+
+      document.querySelectorAll('.cat-chip').forEach(chip => {
+        chip.addEventListener('click', () => applyCategoryFilter(chip.dataset.chip));
+      });
+
+      document.querySelectorAll('.cat-sidebar-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyCategoryFilter(btn.dataset.category));
+      });
+
+      // Search form
+      const searchInput = document.getElementById('searchInput');
+      const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+      searchInput.addEventListener('input', () => {
+        clearSearchBtn.classList.toggle('hidden', !searchInput.value);
+      });
+
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        state.searchQuery = '';
+        clearSearchBtn.classList.add('hidden');
+        renderVideoGrid();
+      });
+
+      document.getElementById('searchForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        state.searchQuery = searchInput.value;
+        state.loadedLimit = 12;
+        switchView('home');
+        renderVideoGrid();
+      });
+
+      // Load more & Quantum Jump across 10,000 videos
+      document.getElementById('loadMoreVideosBtn').addEventListener('click', () => {
+        state.loadedLimit += 12;
+        renderVideoGrid();
+      });
+
+      document.getElementById('randomJumpBtn').addEventListener('click', () => {
+        const randomId = Math.floor(Math.random() * TOTAL_ARCHIVE_SIZE) + 1;
+        openVideoInPlayer(randomId, true);
+        showToast(`Quantum jumped to Archive #${String(randomId).padStart(5, '0')}`);
+      });
+
+      // Hero buttons & Header quick buttons
+      document.getElementById('heroPlayFirstBtn').addEventListener('click', () => openVideoInPlayer(1, true));
+      document.getElementById('heroOpenVault19Btn').addEventListener('click', () => switchView('vault19'));
+      document.getElementById('headerVault19Btn').addEventListener('click', () => switchView('vault19'));
+      document.getElementById('openAutoCreateBtn').addEventListener('click', () => {
+        document.getElementById('nextArchiveSlotLabel').textContent =
+          `#${(TOTAL_ARCHIVE_SIZE + customVideos.length + 1).toLocaleString()}`;
+        switchView('studio');
+      });
+      document.getElementById('closeStudioBtn').addEventListener('click', () => switchView('home'));
+      document.getElementById('backToVaultBtn').addEventListener('click', () => switchView('home'));
+
+      // Delegated clicks on Video Grid (Open Player or + Playlist)
+      document.getElementById('videoGrid').addEventListener('click', (e) => {
+        const queueBtn = e.target.closest('.quick-queue-btn');
+        if (queueBtn) {
+          e.stopPropagation();
+          const qId = Number(queueBtn.dataset.queueId);
+          if (!state.playlistIds.includes(qId)) {
+            state.playlistIds.push(qId);
+            showToast(`Added Archive #${String(qId).padStart(5, '0')} to Sovereign Playlist`);
+          } else {
+            showToast('Already queued in your Sovereign Playlist');
+          }
+          return;
+        }
+
+        const card = e.target.closest('.video-card');
+        if (card) {
+          openVideoInPlayer(Number(card.dataset.videoId), true);
+        }
+      });
+
+      // Watch Player Controls
+      document.getElementById('playerCenterPlayBtn').addEventListener('click', () => setPlayingState(true));
+      document.getElementById('playerPlayPauseBtn').addEventListener('click', () => setPlayingState(!state.isPlaying));
+
+      document.getElementById('playerNextBtn').addEventListener('click', () => {
+        const idx = state.playlistIds.indexOf(state.activeVideo.id);
+        const nextId = state.playlistIds[(idx + 1) % state.playlistIds.length];
+        openVideoInPlayer(nextId, true);
+      });
+
+      document.getElementById('playerAudioToggleBtn').addEventListener('click', () => {
+        const on = audioEngine.toggleMute();
+        document.getElementById('audioStatusLabel').textContent = `Flute & Symphony: ${on ? 'ON' : 'MUTED'}`;
+        document.getElementById('audioWaveIcon').textContent = on ? '🔊' : '🔇';
+      });
+
+      document.getElementById('playerVolumeSlider').addEventListener('input', (e) => {
+        audioEngine.setVolume(Number(e.target.value) / 100);
+      });
+
+      document.getElementById('playerSoundModeSelect').addEventListener('change', (e) => {
+        audioEngine.setMode(e.target.value);
+        showToast(`Synthesizer attuned to ${e.target.options[e.target.selectedIndex].text}`);
+      });
+
+      document.getElementById('playerScrubber').addEventListener('input', (e) => {
+        state.progressPct = Number(e.target.value);
+      });
+
+      document.getElementById('addToQueueBtn').addEventListener('click', () => {
+        if (!state.playlistIds.includes(state.activeVideo.id)) {
+          state.playlistIds.push(state.activeVideo.id);
+          renderPlaylistQueue();
+        }
+        showToast('Pinned to Sovereign Mind-Reset Queue');
+      });
+
+      document.getElementById('copyShareLinkBtn').addEventListener('click', () => {
+        const dummyUrl = `${window.location.href.split('#')[0]}#realm-${state.activeVideo.code}`;
+        const temp = document.createElement('textarea');
+        temp.value = dummyUrl;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        showToast(`Realm link ${state.activeVideo.code} copied to scroll`);
+      });
+
+      document.getElementById('likeVideoBtn').addEventListener('click', () => {
+        showToast('Resonance blessed by Shah-e-Aether ♛');
+      });
+
+      // Playlist & Related Clicks
+      document.getElementById('playlistQueueContainer').addEventListener('click', (e) => {
+        const item = e.target.closest('.playlist-item');
+        if (item) openVideoInPlayer(Number(item.dataset.playQueueId), true);
+      });
+
+      document.getElementById('shufflePlaylistBtn').addEventListener('click', () => {
+        for (let i = state.playlistIds.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [state.playlistIds[i], state.playlistIds[j]] = [state.playlistIds[j], state.playlistIds[i]];
+        }
+        renderPlaylistQueue();
+        showToast('Sovereign Queue shuffled in sacred harmony');
+      });
+
+      document.getElementById('relatedVideosContainer').addEventListener('click', (e) => {
+        const item = e.target.closest('.related-item');
+        if (item) openVideoInPlayer(Number(item.dataset.relatedId), true);
+      });
+
+      // 5,000 Comments Interactions
+      document.getElementById('loadMoreCommentsBtn').addEventListener('click', () => {
+        state.commentsShown = Math.min(5000, state.commentsShown + 15);
+        renderComments();
+      });
+
+      document.getElementById('commentSortSelect').addEventListener('change', (e) => {
+        state.commentSort = e.target.value;
+        renderComments();
+      });
+
+      document.getElementById('newCommentForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = document.getElementById('newCommentInput');
+        const txt = input.value.trim();
+        if (!txt) return;
+        userAddedComments.unshift({
+          author: '@Shah_e_Aether',
+          badge: 'Creator King • Sufi',
+          text: txt,
+          likes: 1,
+          timeAgo: 'Just now',
+          isCreator: true
+        });
+        input.value = '';
+        renderComments();
+        showToast('Reflection inscribed into the 5,000-comment scroll');
+      });
+
+      // Auto-Create Studio Interactions
+      document.querySelectorAll('.studio-preset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.studioPreset = btn.dataset.preset;
+          document.querySelectorAll('.studio-preset-btn').forEach(b => {
+            const active = b === btn;
+            b.classList.toggle('bg-biolume/20', active);
+            b.classList.toggle('border-biolume', active);
+            b.classList.toggle('bg-white/5', !active);
+            b.classList.toggle('border-white/10', !active);
+          });
+          const presetHues = {
+            'Mind Reset Flute': { hue1: 175, hue2: 45, category: 'Mind Reset Flute' },
+            'Heaven God-Goddess': { hue1: 42, hue2: 280, category: 'Heaven God-Goddess' },
+            'Symphony & Pop Cult': { hue1: 255, hue2: 325, category: 'Symphony & Pop Cult' },
+            'Avatar Biolume': { hue1: 162, hue2: 195, category: 'Avatar Biolume' }
+          };
+          studioRenderer.configure(presetHues[state.studioPreset]);
+        });
+      });
+
+      document.getElementById('randomizeTitleBtn').addEventListener('click', () => {
+        const p = TITLE_PREFIXES[Math.floor(Math.random() * TITLE_PREFIXES.length)];
+        const c = TITLE_CORES[Math.floor(Math.random() * TITLE_CORES.length)];
+        document.getElementById('studioTitleInput').value = `${p} ${c}`;
+      });
+
+      document.getElementById('previewSynthBtn').addEventListener('click', () => {
+        const modeMap = {
+          'Mind Reset Flute': 'flute',
+          'Heaven God-Goddess': 'symphony',
+          'Symphony & Pop Cult': 'popcult',
+          'Avatar Biolume': 'flute'
+        };
+        audioEngine.start(modeMap[state.studioPreset] || 'flute');
+        showToast(`Auditioning live ${state.studioPreset} synthesizer...`);
+      });
+
+      document.getElementById('publishAutoVideoBtn').addEventListener('click', () => {
+        const newId = TOTAL_ARCHIVE_SIZE + customVideos.length + 1;
+        const cardNum = Number(document.getElementById('studioCardSelect').value) || 1;
+        const card = VAULT_19_CARDS.find(c => c.num === cardNum) || VAULT_19_CARDS[0];
+        const title = document.getElementById('studioTitleInput').value.trim() ||
+          `Sovereign Auto-Creation #${newId}: ${state.studioPreset}`;
+
+        const newVideo = {
+          id: newId,
+          code: `#${String(newId).padStart(5, '0')}`,
+          title,
+          category: state.studioPreset,
+          channel: "Shah-e-Aether // Auto-Synthesized",
+          duration: "19:19",
+          viewsFormatted: "1 view • Just manifested",
+          likesFormatted: "1K",
+          era: "Manifested Now • Eternal",
+          cardNum: card.num,
+          cardName: card.name,
+          hz: card.hz,
+          hue1: Math.floor(Math.random() * 360),
+          hue2: 44,
+          description: `Auto-synthesized in the Sovereign Creator Studio. Attuned to Vault Card #${card.num} (${card.name} • ${card.hz}) with ${state.studioPreset} harmonics.`
+        };
+
+        customVideos.push(newVideo);
+        state.playlistIds.unshift(newId);
+        renderVideoGrid();
+        openVideoInPlayer(newId, true);
+        showToast(`Manifested & published Realm #${newId} into the Archive!`);
+      });
+
+      // Vault Nineteen Cards click -> Summon Stream
+      document.getElementById('vault19Grid').addEventListener('click', (e) => {
+        const cardEl = e.target.closest('.vault-card');
+        if (!cardEl) return;
+        const cardNum = Number(cardEl.dataset.cardNum);
+        const card = VAULT_19_CARDS.find(c => c.num === cardNum);
+        if (!card) return;
+
+        // Find or create a stream attuned to this card
+        const targetId = card.num * 111;
+        openVideoInPlayer(targetId, true);
+        showToast(`Attuned to Vault Card #${String(card.num).padStart(2, '0')}: ${card.name} (${card.hz})`);
+      });
+
+      // -----------------------------------------------------------------------
+      // 12. MASTER ANIMATION & PLAYER PROGRESS LOOP
+      // -----------------------------------------------------------------------
+      let lastTick = performance.now();
+      function animationLoop(now) {
+        const dt = (now - lastTick) / 1000;
+        lastTick = now;
+
+        if (state.currentView === 'watch') {
+          playerRenderer.drawFrame(state.isPlaying);
+          if (state.isPlaying) {
+            state.progressPct = (state.progressPct + dt * 0.4) % 100;
+            document.getElementById('playerScrubber').value = state.progressPct.toFixed(1);
+            const totalSecs = Math.floor((state.progressPct / 100) * 671);
+            const m = String(Math.floor(totalSecs / 60)).padStart(2, '0');
+            const s = String(totalSecs % 60).padStart(2, '0');
+            document.getElementById('playerCurrentTime').textContent = `${m}:${s}`;
+          }
+        } else if (state.currentView === 'studio') {
+          studioRenderer.drawFrame(true);
+        }
+
+        requestAnimationFrame(animationLoop);
+      }
+
+      window.addEventListener('resize', () => {
+        playerRenderer.resize();
+        studioRenderer.resize();
+      });
+
+      // Boot sequence on window load
+      window.addEventListener('load', () => {
+        renderVault19Cards();
+        renderVideoGrid();
+        playerRenderer.resize();
+        studioRenderer.resize();
+        requestAnimationFrame(animationLoop);
+      });
+    })();
+  </script>
+</body>
+</html>
